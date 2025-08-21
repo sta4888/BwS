@@ -9,3 +9,4 @@ pytest==7.4.4
 pytest-asyncio==0.23.4
 aiogram
 cachetools==5.5.0
+alembic
