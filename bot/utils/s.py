@@ -7,7 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
-from bot.utils.selen_utils import close_modal, login_btn_press, phone_number_press
+from bot.utils.selen_utils import close_modal, login_btn_press
 from bot.vars import URL
 
 # Создание объекта ChromeOptions для дополнительных настроек браузера
@@ -16,25 +16,23 @@ options_chrome = webdriver.ChromeOptions()
 # options_chrome.add_argument('--headless')
 # options_chrome.add_argument('--disable-dev-shm-usage')
 
-browser = webdriver.Chrome()
-browser.get(URL)
+with webdriver.Chrome(options=options_chrome) as browser:
+    # Открытие сайта в браузере
+    browser.get(URL)
 
-WebDriverWait(browser, 10)
+    WebDriverWait(browser, 10)
 
-if close_modal(browser):
-    browser.save_screenshot("page.png")
+    if close_modal(browser):
+        browser.save_screenshot("page.png")
 
-if login_btn_press(browser):
-    browser.save_screenshot("login.png")
+    if login_btn_press(browser):
+        browser.save_screenshot("login.png")
 
-phone_number_press(browser, "934343242")
-# selenium_sessions[user_id] = browser
+    login_field = browser.find_element(By.ID, "phone-number")
+    login_field.click()
 
-# login_field = browser.find_element(By.ID, "phone-number")
-# login_field.click()
-#
-# login_field.send_keys("934343242")
-# browser.save_screenshot("ins_number.png")
+    login_field.send_keys("934343242")
+    browser.save_screenshot("ins_number.png")
 
     # # element = WebDriverWait(browser, 100).until(EC.element_to_be_clickable((By.CLASS_NAME, "home"))).click()
     # time.sleep(30)

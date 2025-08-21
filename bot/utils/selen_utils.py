@@ -18,7 +18,7 @@ def close_modal(driver) -> bool:
         actions.move_to_element(element).click().perform()
 
         time.sleep(2)
-        driver.save_screenshot("page.png")
+        driver.save_screenshot("screens/"+"page.png")
     except Exception as e:
         print(e)
         return False
@@ -35,7 +35,7 @@ def login_btn_press(driver) -> bool:
 
         button_login.click()
         time.sleep(3)
-        driver.save_screenshot("login.png")
+        driver.save_screenshot("screens/"+"login.png")
     except Exception as e:
         print(e)
         return False
@@ -49,6 +49,6 @@ def phone_number_press(driver, phone):
         login_field.click()
 
         login_field.send_keys(phone[-9:])
-        driver.save_screenshot(phone[-9:]+"ins_number.png")
+        driver.save_screenshot("screens/"+phone[-9:]+"ins_number.png")
     except Exception as e:
         print(e)
