@@ -1,3 +1,4 @@
+import os
 import time
 
 from selenium.webdriver import ActionChains
@@ -18,7 +19,9 @@ def close_modal(driver) -> bool:
         actions.move_to_element(element).click().perform()
 
         time.sleep(2)
-        driver.save_screenshot("screens/"+"page.png")
+        path = os.path.join(os.getcwd(), "screens", "page.png")
+        driver.save_screenshot(path)
+        print(f"Скриншот сохранен: {path}")
     except Exception as e:
         print(e)
         return False
@@ -35,7 +38,10 @@ def login_btn_press(driver) -> bool:
 
         button_login.click()
         time.sleep(3)
-        driver.save_screenshot("screens/"+"login.png")
+        path = os.path.join(os.getcwd(), "screens", "login.png")
+        driver.save_screenshot(path)
+        print(f"Скриншот сохранен: {path}")
+
     except Exception as e:
         print(e)
         return False
@@ -49,6 +55,9 @@ def phone_number_press(driver, phone):
         login_field.click()
 
         login_field.send_keys(phone[-9:])
-        driver.save_screenshot("screens/"+phone[-9:]+"ins_number.png")
+        # driver.save_screenshot("screens/"+phone[-9:]+"ins_number.png")
+        path = os.path.join(os.getcwd(), "screens", f"{phone[-9:]}-login.png")
+        driver.save_screenshot(path)
+        print(f"Скриншот сохранен: {path}")
     except Exception as e:
         print(e)

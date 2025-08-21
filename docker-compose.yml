@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  bot:
+    build: .
+    container_name: my_bot
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python main.py
+
+  db:
+    image: postgres:14
+    container_name: bot_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: botuser
+      POSTGRES_PASSWORD: botpass
+      POSTGRES_DB: botdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
