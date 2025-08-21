@@ -5,3 +5,4 @@ load_dotenv()
 
 URL = os.getenv('url')
 BOT_TOKEN = os.getenv('bot_token')
+BOT_DB = os.getenv('bot_db')

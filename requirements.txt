@@ -10,3 +10,6 @@ pytest-asyncio==0.23.4
 aiogram
 cachetools==5.5.0
 alembic
+asyncpg
+psycopg==3.2.1
+psycopg-binary==3.2.1

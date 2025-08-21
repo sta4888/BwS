@@ -1,5 +1,10 @@
 version: "3.9"
 
+
+networks:
+  botNetwork:
+    driver: bridge
+
 services:
   bot:
     build: .
@@ -9,6 +14,8 @@ services:
       - .:/app
     working_dir: /app
     command: python main.py
+    networks:
+      - botNetwork
 
   db:
     image: postgres:14
@@ -20,6 +27,20 @@ services:
       POSTGRES_DB: botdb
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - botNetwork
+
+  pg:
+    image: dpage/pgadmin4
+    container_name: PgAdmin
+    restart: always
+    ports:
+      - "8888:8888"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    networks:
+      - botNetwork
 
 volumes:
   pgdata:
